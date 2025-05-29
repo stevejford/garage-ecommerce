@@ -1,0 +1,170 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Product model
+model Product {
+  id                String    @id @default(cuid())
+  name              String
+  brand             Brand     @relation(fields: [brandId], references: [id])
+  brandId           String
+  category          Category  @relation(fields: [categoryId], references: [id])
+  categoryId        String
+  subCategory       SubCategory? @relation(fields: [subCategoryId], references: [id])
+  subCategoryId     String?
+  doorType          DoorType[]
+  sku               String    @unique
+  description       String
+  compatibilityNotes String?
+  images            Image[]
+  manuals           Manual[]
+  price             Float
+  stockQty          Int
+  tags              Tag[]
+  isFeatured        Boolean   @default(false)
+  isArchived        Boolean   @default(false)
+  orderItems        OrderItem[]
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+// Brand model
+model Brand {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  logo        String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// Category model
+model Category {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  description  String?
+  products     Product[]
+  subCategories SubCategory[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// SubCategory model
+model SubCategory {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([name, categoryId])
+}
+
+// DoorType model
+model DoorType {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// Image model
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  isMain    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Manual model
+model Manual {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Tag model
+model Tag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// Order model
+model Order {
+  id        String      @id @default(cuid())
+  userId    String
+  items     OrderItem[]
+  status    OrderStatus @default(PENDING)
+  total     Float
+  name      String
+  email     String
+  phone     String?
+  address   String?
+  notes     String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+// OrderItem model
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  price     Float
+}
+
+// OrderStatus enum
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// ClerkUser model to store Clerk user metadata
+model ClerkUser {
+  id        String   @id
+  email     String   @unique
+  fullName  String?
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// UserRole enum
+enum UserRole {
+  ADMIN
+  USER
+}

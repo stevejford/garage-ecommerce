@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/geist-sans');
+
+:root {
+  --background-color: #f5f5f4; /* Stone 100 */
+  --surface-color: #ffffff;
+  --primary-color: #2196f3; /* Blue 500 */
+  --border-color: #e5e7eb; /* Gray 200 */
+  --text-primary: #1f2937; /* Gray 800 */
+  --text-secondary: #4b5563; /* Gray 600 */
+  --text-disabled: #9ca3af; /* Gray 400 */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius: 0.5rem;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 2rem; /* 32px */
+}
+
+h2 {
+  font-size: 1.75rem; /* 28px */
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+}
+
+h4 {
+  font-size: 1.25rem; /* 20px */
+}
+
+.subheading-large {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 500;
+}
+
+.subheading-small {
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+}
+
+.body-large {
+  font-size: 1.125rem; /* 18px */
+}
+
+.body-medium {
+  font-size: 1rem; /* 16px */
+}
+
+/* Material Design inspired components */
+.material-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.material-card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
+}
+
+.material-card-body {
+  padding: 1.5rem;
+}
+
+.material-card-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--background-color);
+}
+
+.material-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background-color: var(--primary-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.material-button-primary:hover {
+  background-color: #1e88e5; /* Blue 600 */
+}
+
+.material-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--surface-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.material-button-secondary:hover {
+  background-color: #f9fafb; /* Gray 50 */
+}
+
+.material-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.material-nav-item-active {
+  background-color: #eff6ff; /* Blue 50 */
+  color: #2563eb; /* Blue 600 */
+}
+
+.material-nav-item-inactive {
+  color: var(--text-primary);
+}
+
+.material-nav-item-inactive:hover {
+  background-color: #f9fafb; /* Gray 50 */
+  color: var(--text-primary);
+}

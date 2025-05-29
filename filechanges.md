@@ -1,0 +1,56 @@
+# File Changes Log
+
+## 2025-05-22
+- Created initial project documentation:
+  - MVP.md - Minimum Viable Product definition
+  - ROADMAP.md - Development roadmap with phases
+  - instructions.md - Project overview and guidelines
+- Initialized Next.js 15 project with TypeScript and TailwindCSS
+- Set up basic project structure
+- Created Prisma schema with models for products, orders, users, etc.
+- Set up environment variables for Neon PostgreSQL, Clerk, and UploadThing
+- Installed dependencies including Clerk, UploadThing, and shadcn/ui components
+- Created middleware.ts for Clerk authentication and route protection
+- Updated root layout.tsx to include Clerk provider
+- Created layout files for shop, admin, and auth sections
+- Created Shopify-inspired home page with modern e-commerce design
+- Created shop page with product listings and filter options
+- Created admin dashboard page with overview statistics and tables
+- Fixed Clerk authentication configuration and TypeScript issues
+- Created sign-in and sign-up pages with Clerk integration
+- Created navbar and footer components for consistent layout
+- Created admin sidebar for admin dashboard navigation
+- Created product detail page with comprehensive product information
+- Updated layouts to include navigation components
+
+## 2025-05-22 (continued)
+- Implemented UploadThing integration for file uploads:
+  - Created src/lib/uploadthing.ts with file router configuration
+  - Created API route handler in src/app/api/uploadthing/route.ts
+  - Created upload-button.tsx component for simple file uploads
+  - Created file-upload.tsx component for managing multiple files
+  - Created custom-uploader.tsx using useUploadThing hook for more control
+  - Created product-form.tsx with image and manual upload capabilities
+  - Added utils/uploadthing.ts with generated React helpers
+  - Updated .env.local with necessary environment variables
+- Fixed Clerk authentication issues:
+  - Updated Clerk initialization by explicitly setting the publishable key
+  - Updated middleware.ts to use the latest clerkMiddleware approach
+  - Added proper route protection for admin routes
+  - Ensured public routes are accessible without authentication
+  - Added debug logging for authentication status
+- Enhanced UI and navigation for Shopify-like experience:
+  - Fixed duplicate footer on the main landing page
+  - Created missing shop pages (brands, categories, contact)
+  - Created account page with proper authentication handling
+  - Updated navbar with more prominent login/signup buttons
+  - Improved styling and user experience for authentication flow
+  - Added "My Account" link for authenticated users
+- Implemented e-commerce functionality:
+  - Created standalone authentication pages (sign-in, sign-up, sign-out)
+  - Added fallback authentication when Clerk has initialization issues
+  - Created shopping cart page with item management and order summary
+  - Implemented multi-step checkout process with shipping and payment options
+  - Added order confirmation page with order details
+  - Enhanced cart button in navbar with item count indicator
+  - Ensured all navigation links work properly throughout the application
